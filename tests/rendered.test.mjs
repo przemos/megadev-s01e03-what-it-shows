@@ -8,7 +8,9 @@ const load = (path) => readFileSync(new URL(path, root), 'utf8');
 
 test('signed correction is actually rendered with computed totals and desk reference', () => {
   const html = load('rendered/kb/incidents/4471-split/index.html');
-  const signature = 'przemos / Copilot / S01E03 / 2026-10-29';
+  const source = load('src/routes/kb/incidents/4471-split/+page.svx');
+  const signature = source.match(/^signature: '([^']+)'$/m)?.[1];
+  assert.ok(signature?.startsWith('v1.'), 'The page must use the course-issued signature');
   assert.ok(html.includes(deskRef(signature)));
   assert.ok(!html.includes('no desk ref:'));
   for (const text of ['379', '33', '412', '427', '184', '183', 'R-41202', 'R-41620']) {

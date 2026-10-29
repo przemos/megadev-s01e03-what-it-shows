@@ -4,7 +4,7 @@ title: '#4471 correction: separate the parser and the form hint'
 owner: przemos / Copilot
 status: investigated-export
 reviewed: '2026-10-29'
-signature: 'przemos / Copilot / S01E03 / 2026-10-29'
+signature: 'v1.eyJzdWIiOiIzMTAxIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyNjAwNDksImV4cCI6MTc5MzM0NjQ0OX0.BIGCI_c5_fnWHSXHL1qWrP3z-Vpp5cH4A5Jnai7isg4'
 ---
 
 <script>

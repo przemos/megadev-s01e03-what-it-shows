@@ -64,6 +64,8 @@ by the build.
 
 The original accepted decision and original incident narrative remain unchanged
 so their disagreement with the executable evidence stays inspectable. The
-correction is signed by przemos / Copilot; its desk reference is computed by the
-exported `RenderStamp` component. The review date records this investigation, not
+correction is authored by przemos / Copilot and signed with the course-issued
+page signature; its desk reference is computed by the exported `RenderStamp`
+component. This signature is the public page proof required by the course, not
+a GitHub or course login credential. The review date records this investigation, not
 the freshness of the exported queue.
