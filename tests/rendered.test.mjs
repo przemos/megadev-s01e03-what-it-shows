@@ -20,6 +20,10 @@ test('signed correction is actually rendered with computed totals and desk refer
   assert.ok(html.includes('timezone defect'));
   assert.ok(!html.includes('<CauseTable'));
   assert.ok(!html.includes('<RenderStamp'));
+  assert.ok(html.includes('Parser: fixed.'));
+  assert.ok(html.includes('Hint: won’t fix.') || html.includes("Hint: won't fix."));
+  assert.ok(html.includes('not planned'));
+  assert.ok(html.includes('not as a shipped bug fix'));
 });
 
 test('original rendered prose and evidence expose their contradiction', () => {

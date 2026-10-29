@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 correction: separate the parser and the form hint'
 owner: przemos / Copilot
-status: investigated-export
+status: closed-mixed-outcomes
 reviewed: '2026-10-29'
 signature: 'v1.eyJzdWIiOiIzMTAxIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyNjAwNDksImV4cCI6MTc5MzM0NjQ0OX0.BIGCI_c5_fnWHSXHL1qWrP3z-Vpp5cH4A5Jnai7isg4'
 ---
@@ -14,6 +14,23 @@ signature: 'v1.eyJzdWIiOiIzMTAxIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpY
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
+
+## Engineering outcome after the investigation
+
+The [course's engineering update](https://hq.mega.dev/challenges/what-it-shows)
+reports that #4471 closed on 5 October:
+
+- **Parser: fixed.** The update names `fix(dates): parse dd/mm for eu locales`.
+  [Our parser ticket](https://github.com/przemos/megadev-s01e03-what-it-shows/issues/1)
+  is closed as **completed** on that evidence.
+- **Hint: won't fix.** The booking-v3 form was retired.
+  [Our hint ticket](https://github.com/przemos/megadev-s01e03-what-it-shows/issues/2)
+  is closed as **not planned**, not as a shipped bug fix.
+
+These are different resolutions. A closed ticket does not by itself mean the
+bug was fixed. This is the desk's reported engineering outcome, not a production
+test we performed. The tables and original diagnosis below remain the historical
+2026-10-04 snapshot; they do not include the later closure or prove recovery.
 
 ## What changed
 
