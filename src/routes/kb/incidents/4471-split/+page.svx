@@ -1,0 +1,80 @@
+---
+layout: runbook
+title: '#4471 correction: separate the parser and the form hint'
+owner: przemos / Copilot
+status: investigated-export
+reviewed: '2026-10-29'
+signature: 'przemos / Copilot / S01E03 / 2026-10-29'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import IncidentEvidence from '#lib/kb/IncidentEvidence.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## What changed
+
+The [original incident page](/kb/incidents/4471) says "one issue, one fix queued".
+Its rendered cause table contradicts that claim: one merged ticket contains two
+separate failure paths. A fix to the shared parser will not correct the booking form's
+hint. The table also shows that the hint reports have no ticket of their own.
+
+<Callout>
+This is an investigation of the export dated 2026-10-04, not a live queue.
+The desk keeps working: refresh the export and rebuild before making a current
+operational claim. "Known" and "queued" do not mean fixed.
+</Callout>
+
+## Separate engineering tickets
+
+- [Shared parser reads day-first dates month-first](https://github.com/przemos/megadev-s01e03-what-it-shows/issues/1).
+  The shared parser reads month first although these tenants write day first.
+  App and email reports take this path; form reports do too when their form hint
+  is day-first. Use the tenant directory, not the reporter's browser language.
+- [booking-v3 gives day-first tenants a month-first hint](https://github.com/przemos/megadev-s01e03-what-it-shows/issues/2).
+  The form prints `MM/DD/YYYY`, people follow it, and the form reads their input
+  in the tenant's day-first order. This path is limited to form reports from
+  day-first tenants on booking-v3: Alder Physio, Copper Studio and Pale Harbour.
+
+Counts, affected tenant counts, intake tags and observed date ranges below run
+from the exported reports and tenant files at render time. The two groups are
+disjoint and together account for every unique report merged into the ticket.
+
+<CauseTable ticket={4471} />
+
+## What the desk's activity shows
+
+<QueueTimeline ticket={4471} />
+
+<IncidentEvidence />
+
+## Change the triage rule, not just this ticket
+
+The [accepted subject-line decision](/kb/decisions/0001-dedupe-by-subject) and
+[triage prose](/kb/triage/dedupe) disagree with the executable dedupe explorer.
+The triage page was reviewed in June 2024; its rendered stale warning matters.
+An identical subject can hide different causes, while different subjects can
+describe the same failure path. Neither the subject nor the intake tag proves
+that two reports are duplicates.
+
+The [replacement decision](/kb/decisions/0002-dedupe-by-cause) is proposed for
+desk approval. It preserves the accepted record rather than rewriting history.
+Use tenant locale, form version, channel and report evidence to identify a cause.
+Keep unknown tenants and conflicting evidence for manual review.
+
+## Verification and impact
+
+The kb identifies sched-prod as serving about 300k people. That is product context,
+not an affected-user count; this export counts reports, not distinct people.
+Do not infer a timezone defect from a one-day description alone, or claim a
+parser fix will resolve the separate hint issue.
+
+Rebuild both the original and correction pages, check the computed totals, and
+run the regression tests. Confirm each issue's fix independently with ambiguous
+day/month inputs and all affected channels before closing it. Continue to watch
+new received reports rather than treating merge throughput as recovery.
+
+<RenderStamp {signature} />
